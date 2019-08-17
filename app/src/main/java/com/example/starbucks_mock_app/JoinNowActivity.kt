@@ -66,13 +66,41 @@ class JoinNowActivity : AppCompatActivity() {
         newUser.email = email
         newUser.password = pass
 
+        //TODO: form validation
+
+        showSpinner()
         thread(start = true) {
-            dynamoDBMapper?.save(newUser)
+            val res = dynamoDBMapper?.load(UsersDO::class.java, email)
+
+            if (res != null) {
+                runOnUiThread {
+                    hideSpinner()
+                    showEmailRegisteredText()
+                }
+            } else {
+                dynamoDBMapper?.save(newUser)
+                runOnUiThread {
+                    hideSpinner()
+                }
+                goToLocator()
+            }
         }
     }
 
-    fun goToLocator() {
+    private fun goToLocator() {
         val intent = Intent(this, MapsActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun showEmailRegisteredText() {
+        emailRegisteredView.visibility = View.VISIBLE
+    }
+
+    private fun showSpinner() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hideSpinner() {
+        progressBar.visibility = View.INVISIBLE
     }
 }
