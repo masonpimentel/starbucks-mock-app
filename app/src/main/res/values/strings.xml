@@ -16,9 +16,23 @@
     </string>
     <string name="action_settings">Settings</string>
     <string name="sign_in">Sign in</string>
-    <string name="join_now">Join now</string>
+
+    <string name="join_now_button">Join now</string>
+    <string name="join_now_email_hint">Email</string>
+    <string name="join_now_check_email">Check the email</string>
+    <string name="join_now_password_hint">Password</string>
+    <string name="join_now_password_requirements">At least one character</string>
+    <string name="join_now_email_registered">
+        Looks like this email address is already registered.
+    </string>
+    <string name="join_now_sign_in">
+        Sign in
+    </string>
+
+
     <string name="title_activity_sign_up">Sign up</string>
-    <string name="title_activity_join_now">Join Now</string>
+    <string name="title_activity_join_now">Starbucks Rewards</string>
     <string name="title_activity_sign_in">Sign in</string>
     <string name="title_activity_delete">Sign in</string>
+
 </resources>

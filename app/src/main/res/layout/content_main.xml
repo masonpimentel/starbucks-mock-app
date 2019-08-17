@@ -16,7 +16,7 @@
             <!--android:text="@string/large_text"/>-->
 
     <Button
-            android:text="@string/join_now"
+            android:text="@string/join_now_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/join_now_button" android:onClick="goToJoinNow"/>
 

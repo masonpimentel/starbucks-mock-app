@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity
 import com.amazonaws.auth.AWSCredentialsProvider
 
 import com.amazonaws.mobile.auth.core.IdentityHandler
@@ -17,6 +17,7 @@ import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient
 import com.amazonaws.mobile.client.AWSMobileClient
 import com.amazonaws.mobile.config.AWSConfiguration
+import kotlinx.android.synthetic.main.content_join_now.*
 
 class JoinNowActivity : AppCompatActivity() {
     private var dynamoDBMapper: DynamoDBMapper? = null
@@ -56,9 +57,9 @@ class JoinNowActivity : AppCompatActivity() {
         }.execute()
     }
 
-    fun goToLocator(view: View) {
-        val email = "tuser2@gmail.com"
-        val pass = "tpass2"
+    fun registerUser(view: View) {
+        val email = newEmail.text.toString()
+        val pass = newPassword.text.toString()
 
         val newUser = UsersDO()
         newUser.userId = email
@@ -68,7 +69,9 @@ class JoinNowActivity : AppCompatActivity() {
         thread(start = true) {
             dynamoDBMapper?.save(newUser)
         }
+    }
 
+    fun goToLocator() {
         val intent = Intent(this, MapsActivity::class.java)
         startActivity(intent)
     }
