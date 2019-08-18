@@ -27,6 +27,10 @@ class JoinNowActivity : AppCompatActivity() {
     private var credentialsProvider: AWSCredentialsProvider? = null
     private var awsConfiguration: AWSConfiguration? = null
 
+    private var formIsValid = false
+    private var emailIsValid = false
+    private var passwordIsValid = false
+
     companion object {
         private val TAG: String = this::class.java.simpleName
     }
@@ -46,7 +50,12 @@ class JoinNowActivity : AppCompatActivity() {
                 //nothing to do
             }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, count: Int) {
+                if (count > 0) {
+                    passwordComplete()
+                } else {
+                    passwordIncomplete()
+                }
             }
         })
 
@@ -75,14 +84,14 @@ class JoinNowActivity : AppCompatActivity() {
     }
 
     fun registerUser(view: View) {
+        if (!formIsValid) return
+
         val email = newEmail.text.toString()
         val pass = newPassword.text.toString()
 
         val newUser = UsersDO()
         newUser.userId = email
         newUser.password = pass
-
-        //TODO: form validation
 
         showSpinner()
         thread(start = true) {
@@ -108,14 +117,10 @@ class JoinNowActivity : AppCompatActivity() {
         if (hasFocus) return
 
         if (Patterns.EMAIL_ADDRESS.matcher(newEmail.text.toString()).matches()) {
-            hideCheckEmail()
+            emailValid()
         } else {
-            showCheckEmail()
+            emailInvalid()
         }
-    }
-
-    private fun showEmailRegisteredText() {
-        emailRegisteredView.visibility = View.VISIBLE
     }
 
     private fun showSpinner() {
@@ -126,16 +131,40 @@ class JoinNowActivity : AppCompatActivity() {
         progressBar.visibility = View.INVISIBLE
     }
 
+    private fun emailValid() {
+        checkEmail.visibility = View.INVISIBLE
+        emailIsValid = true
+        updateFormStatus()
+    }
+
+    private fun emailInvalid() {
+        checkEmail.visibility = View.VISIBLE
+        emailIsValid = false
+        updateFormStatus()
+    }
+
+    private fun passwordComplete() {
+        delete.text = "OK"
+        passwordIsValid = true
+        updateFormStatus()
+    }
+
+    private fun passwordIncomplete() {
+        delete.text = "X"
+        passwordIsValid = false
+        updateFormStatus()
+    }
+
+    private fun updateFormStatus() {
+        formIsValid = emailIsValid && passwordIsValid
+    }
+
+    private fun showEmailRegisteredText() {
+        emailRegisteredView.visibility = View.VISIBLE
+    }
+
     private fun goToLocator() {
         val intent = Intent(this, MapsActivity::class.java)
         startActivity(intent)
-    }
-
-    private fun showCheckEmail() {
-        checkEmail.visibility = View.VISIBLE
-    }
-
-    private fun hideCheckEmail() {
-        checkEmail.visibility = View.INVISIBLE
     }
 }
