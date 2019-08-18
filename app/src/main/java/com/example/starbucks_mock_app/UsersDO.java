@@ -15,7 +15,6 @@ import java.util.Set;
 
 public class UsersDO {
     private String _userId;
-    private String _email;
     private String _password;
 
     @DynamoDBHashKey(attributeName = "userId")
@@ -26,14 +25,6 @@ public class UsersDO {
 
     public void setUserId(final String _userId) {
         this._userId = _userId;
-    }
-    @DynamoDBAttribute(attributeName = "email")
-    public String getEmail() {
-        return _email;
-    }
-
-    public void setEmail(final String _email) {
-        this._email = _email;
     }
     @DynamoDBAttribute(attributeName = "password")
     public String getPassword() {

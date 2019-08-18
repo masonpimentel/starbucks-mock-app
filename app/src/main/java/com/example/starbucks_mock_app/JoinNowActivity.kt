@@ -2,7 +2,10 @@ package com.example.starbucks_mock_app
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.util.Patterns
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.amazonaws.auth.AWSCredentialsProvider
@@ -32,6 +35,20 @@ class JoinNowActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_join_now)
         setSupportActionBar(toolbar)
+
+        newEmail.setOnFocusChangeListener { _, b -> validateEmail(b) }
+        newPassword.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                //nothing to do
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //nothing to do
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
 
         AWSMobileClient.getInstance().initialize(this) {
             credentialsProvider = AWSMobileClient.getInstance().credentialsProvider
@@ -63,7 +80,6 @@ class JoinNowActivity : AppCompatActivity() {
 
         val newUser = UsersDO()
         newUser.userId = email
-        newUser.email = email
         newUser.password = pass
 
         //TODO: form validation
@@ -84,12 +100,18 @@ class JoinNowActivity : AppCompatActivity() {
                 }
                 goToLocator()
             }
+            //TODO: error handling (including network timeout)
         }
     }
 
-    private fun goToLocator() {
-        val intent = Intent(this, MapsActivity::class.java)
-        startActivity(intent)
+    private fun validateEmail(hasFocus: Boolean) {
+        if (hasFocus) return
+
+        if (Patterns.EMAIL_ADDRESS.matcher(newEmail.text.toString()).matches()) {
+            hideCheckEmail()
+        } else {
+            showCheckEmail()
+        }
     }
 
     private fun showEmailRegisteredText() {
@@ -102,5 +124,18 @@ class JoinNowActivity : AppCompatActivity() {
 
     private fun hideSpinner() {
         progressBar.visibility = View.INVISIBLE
+    }
+
+    private fun goToLocator() {
+        val intent = Intent(this, MapsActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun showCheckEmail() {
+        checkEmail.visibility = View.VISIBLE
+    }
+
+    private fun hideCheckEmail() {
+        checkEmail.visibility = View.INVISIBLE
     }
 }
