@@ -27,11 +27,11 @@ class JoinNowActivity : FormActivity() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, count: Int) {
                 if (passwordIsValid(getPassword())) {
-                    delete.text = "OK"
+                    passwordCompletion.setImageResource(R.drawable.ic_baseline_done_24px)
                     passwordIsValid = true
                     updateFormStatus()
                 } else {
-                    delete.text = "X"
+                    passwordCompletion.setImageResource(R.drawable.ic_baseline_clear_24px)
                     passwordIsValid = false
                     updateFormStatus()
                 }
