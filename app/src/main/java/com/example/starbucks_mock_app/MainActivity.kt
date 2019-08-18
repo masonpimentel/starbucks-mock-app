@@ -22,10 +22,11 @@ class MainActivity : AppCompatActivity() {
         var dynamoDBMapper: DynamoDBMapper? = null
     }
 
+
+    //TODO: fix landscape
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
 
         //TODO: add some kind of initialization dialog or splash screen
 
@@ -40,8 +41,8 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onIdentityId(identityId: String?) {
                     Log.i("AWSMobileClientLog", "Successfully established identity")
-                    val cachedIdentityId = IdentityManager.getDefaultIdentityManager().cachedUserID
-                    // Do something with the identity here
+                    //future work would be storing this locally
+                    //val cachedIdentityId = IdentityManager.getDefaultIdentityManager().cachedUserID
 
                     val client = AmazonDynamoDBClient(AWSMobileClient.getInstance().credentialsProvider)
                     dynamoDBMapper = DynamoDBMapper.builder()
@@ -51,14 +52,6 @@ class MainActivity : AppCompatActivity() {
                 }
             })
         }.execute()
-
-//        toolbar_layout.apply {
-//            setCollapsedTitleTextColor(500)
-//            setExpandedTitleColor(500)
-//        }
-
-
-        //        Log.i("logger info", "go to login")
     }
 
     fun goToLogin(view: View) {
