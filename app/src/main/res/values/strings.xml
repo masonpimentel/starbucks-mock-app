@@ -16,10 +16,10 @@
     <string name="title_activity_main">"Starbucks"</string>
     <string name="main_sign_in">Sign in</string>
     <string name="main_join_now">Join now</string>
-    <string name="main_coffee">"It's a great day for coffee"</string>
+    <string name="main_coffee">"It's a great day for coffee ☕"</string>
     <string name="main_rewards">STARBUCKS REWARDS</string>
 
-    <string name="title_activity_join_now">Starbucks Rewards</string>
+    <string name="title_activity_join_now">Starbucks® Rewards</string>
     <string name="join_now_button">Join now</string>
     <string name="join_now_email_hint">Email</string>
     <string name="join_now_check_email">Check the email</string>

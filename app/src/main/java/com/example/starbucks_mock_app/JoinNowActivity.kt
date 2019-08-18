@@ -14,7 +14,6 @@ class JoinNowActivity : FormActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_join_now)
-        setSupportActionBar(toolbar)
 
         newEmail.setOnFocusChangeListener { _, b -> validateEmail(b) }
         newPassword.addTextChangedListener(object : TextWatcher {
@@ -41,7 +40,10 @@ class JoinNowActivity : FormActivity() {
     }
 
     fun registerUser(view: View) {
-        if (!formIsValid) return
+        validateEmail(hasFocus = false, submissionCheck = true)
+
+        //future work - handle db connection not ready
+        if (!formIsValid || MainActivity.dynamoDBMapper == null) return
 
         val email = getEmail()
         val pass = getPassword()
@@ -56,16 +58,17 @@ class JoinNowActivity : FormActivity() {
 
             if (res != null) {
                 runOnUiThread {
-                    hideSpinner()
                     emailRegisteredView.visibility = View.VISIBLE
                 }
             } else {
                 MainActivity.dynamoDBMapper?.save(newUser)
                 runOnUiThread {
-                    hideSpinner()
                     emailRegisteredView.visibility = View.INVISIBLE
                 }
                 goToLocator()
+            }
+            runOnUiThread {
+                hideSpinner()
             }
             //TODO: error handling (including network timeout)
         }
@@ -79,8 +82,8 @@ class JoinNowActivity : FormActivity() {
         joinNowProgressBar.visibility = View.INVISIBLE
     }
 
-    private fun validateEmail(hasFocus: Boolean) {
-        if (hasFocus) return
+    private fun validateEmail(hasFocus: Boolean, submissionCheck: Boolean = false) {
+        if (!submissionCheck && hasFocus) return
 
         if (emailIsValid(getEmail())) {
             joinNowCheckEmail.visibility = View.INVISIBLE
