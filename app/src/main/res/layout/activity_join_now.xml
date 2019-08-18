@@ -15,6 +15,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" android:id="@+id/constraintLayout">
 
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24px"
+                android:id="@+id/imageView" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="16dp"
+                android:layout_marginStart="12dp" android:onClick="popActivity"/>
         <TextView
                 android:text="@string/title_activity_join_now"
                 android:layout_width="380dp"
@@ -27,7 +33,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
                 app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="1.0"
-                android:textStyle="bold" android:textSize="27sp"/>
+                android:textStyle="bold" android:textSize="27sp" android:textColor="#000000"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

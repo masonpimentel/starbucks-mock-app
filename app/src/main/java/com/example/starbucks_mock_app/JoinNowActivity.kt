@@ -74,6 +74,10 @@ class JoinNowActivity : FormActivity() {
         }
     }
 
+    fun popActivity(view: View) {
+        finish()
+    }
+
     private fun showSpinner() {
         joinNowProgressBar.visibility = View.VISIBLE
     }

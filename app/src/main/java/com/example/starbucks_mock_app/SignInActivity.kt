@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 
-import kotlinx.android.synthetic.main.activity_sign_in.*
-import kotlinx.android.synthetic.main.content_join_now.*
 import kotlinx.android.synthetic.main.content_sign_in.*
 import kotlin.concurrent.thread
 
@@ -55,6 +53,10 @@ class SignInActivity : FormActivity() {
             }
             //TODO: error handling (including network timeout)
         }
+    }
+
+    fun popActivity(view: View) {
+        finish()
     }
 
     private fun showSpinner() {
