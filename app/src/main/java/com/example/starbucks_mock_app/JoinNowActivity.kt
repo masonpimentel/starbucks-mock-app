@@ -91,10 +91,12 @@ class JoinNowActivity : FormActivity() {
 
         if (emailIsValid(getEmail())) {
             joinNowCheckEmail.visibility = View.INVISIBLE
+            emailError.visibility = View.INVISIBLE
             emailIsValid = true
             updateFormStatus()
         } else {
             joinNowCheckEmail.visibility = View.VISIBLE
+            emailError.visibility = View.VISIBLE
             emailIsValid = false
             updateFormStatus()
         }

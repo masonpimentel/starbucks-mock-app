@@ -41,11 +41,13 @@ class SignInActivity : FormActivity() {
             if (res != null) {
                 runOnUiThread {
                     signInPasswordInfo.text = ""
+                    clearPasswordFieldError()
                 }
                 goToLocator()
             } else {
                 runOnUiThread {
                     signInPasswordInfo.text = getString(R.string.sign_in_incorrect_credentials)
+                    passwordFieldError()
                 }
             }
             runOnUiThread {
@@ -72,10 +74,12 @@ class SignInActivity : FormActivity() {
 
         if (emailIsValid(getEmail())) {
             signInCheckEmail.visibility = View.INVISIBLE
+            signInEmailError.visibility = View.INVISIBLE
             emailIsValid = true
             updateFormStatus()
         } else {
             signInCheckEmail.visibility = View.VISIBLE
+            signInEmailError.visibility = View.VISIBLE
             emailIsValid = false
             updateFormStatus()
         }
@@ -85,16 +89,24 @@ class SignInActivity : FormActivity() {
         if (!submissionCheck && hasFocus) return
 
         if (passwordIsValid(getPassword())) {
-            Log.i("sign in activity", "pwd valid")
             signInPasswordInfo.text = ""
+            clearPasswordFieldError()
             passwordIsValid = true
             updateFormStatus()
         } else {
-            Log.i("sign in activity", "pwd invalid")
             signInPasswordInfo.text = getString(R.string.sign_in_password_requirements)
+            passwordFieldError()
             passwordIsValid = false
             updateFormStatus()
         }
+    }
+
+    private fun clearPasswordFieldError() {
+        signInPasswordError.visibility = View.INVISIBLE
+    }
+
+    private fun passwordFieldError() {
+        signInPasswordError.visibility = View.VISIBLE
     }
 
     private fun getEmail(): String {
