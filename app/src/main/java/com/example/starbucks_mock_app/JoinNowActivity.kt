@@ -106,6 +106,7 @@ class JoinNowActivity : AppCompatActivity() {
                 dynamoDBMapper?.save(newUser)
                 runOnUiThread {
                     hideSpinner()
+                    hideEmailRegisteredText()
                 }
                 goToLocator()
             }
@@ -161,6 +162,10 @@ class JoinNowActivity : AppCompatActivity() {
 
     private fun showEmailRegisteredText() {
         emailRegisteredView.visibility = View.VISIBLE
+    }
+
+    private fun hideEmailRegisteredText() {
+        emailRegisteredView.visibility = View.INVISIBLE
     }
 
     private fun goToLocator() {
