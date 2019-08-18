@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/activity_join_now"
-        tools:context=".JoinNowActivity">
+        tools:context=".JoinNowActivity" android:id="@+id/joinNowLayout">
 
     <Button
             android:text="@string/join_now_button"

@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">starbucks-mock-app</string>
-    <string name="title_activity_maps">Store locator</string>
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -12,12 +11,11 @@
     <string name="login_failed">"Login failed"</string>
     <string name="action_settings">Settings</string>
 
-
     <string name="title_activity_main">"Starbucks"</string>
     <string name="main_sign_in">Sign in</string>
     <string name="main_join_now">Join now</string>
     <string name="main_coffee">"It's a great day for coffee ☕"</string>
-    <string name="main_rewards">STARBUCKS REWARDS</string>
+    <string name="main_rewards">STARBUCKS® REWARDS</string>
 
     <string name="title_activity_join_now">Starbucks® Rewards</string>
     <string name="join_now_button">Join now</string>
@@ -39,5 +37,7 @@
     <string name="sign_in_incorrect_credentials">
         The email, username, or password entered is incorrect
     </string>
+
+    <string name="title_activity_maps">Store locator</string>
 
 </resources>
