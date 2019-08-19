@@ -32,20 +32,7 @@
             android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintVertical_bias="0.987" android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toStartOf="@+id/joinNowButton" app:layout_constraintHorizontal_bias="0.928"/>
-    <EditText
-            android:layout_width="fill_parent"
-            android:layout_height="46dp"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/newPassword"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:hint="@string/join_now_password_hint" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/newEmail" app:layout_constraintHorizontal_bias="0.75"
-            app:layout_constraintVertical_bias="0.116"/>
+
     <EditText
             android:layout_width="fill_parent"
             android:layout_height="46dp"
@@ -65,6 +52,20 @@
             app:layout_constraintTop_toBottomOf="@+id/newEmail"
             android:visibility="invisible" android:layout_marginStart="12dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="12dp"/>
+    <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="46dp"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/newPassword"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:hint="@string/join_now_password_hint" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/newEmail" app:layout_constraintHorizontal_bias="0.75"
+            app:layout_constraintVertical_bias="0.116"/>
     <TextView
             android:text="@string/join_now_password_requirements"
             android:layout_width="wrap_content"

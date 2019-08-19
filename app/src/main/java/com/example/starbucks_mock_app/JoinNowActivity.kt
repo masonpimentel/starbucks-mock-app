@@ -38,7 +38,7 @@ class JoinNowActivity : FormActivity() {
         validatePassword(hasFocus = false, submissionCheck = false)
 
         //future work - handle db connection not ready
-        if (!formIsValid || MainActivity.dynamoDBMapper == null || !checkInternetConnection(R.id.joinNowLayout)) return
+        if (!formIsValid || !checkInternetConnection(R.id.joinNowLayout) || MainActivity.dynamoDBMapper == null) return
 
         val email = getEmail()
         val pass = getPassword()
