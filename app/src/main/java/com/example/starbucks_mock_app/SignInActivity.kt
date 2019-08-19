@@ -36,9 +36,9 @@ class SignInActivity : FormActivity() {
 
         showSpinner()
         thread(start = true) {
-            val res = MainActivity.dynamoDBMapper?.load(UsersDO::class.java, email)
+            val entry = MainActivity.dynamoDBMapper?.load(UsersDO::class.java, email)
 
-            if (res != null) {
+            if (entry != null && pass == entry.password) {
                 runOnUiThread {
                     signInPasswordInfo.text = ""
                     clearPasswordFieldError()
