@@ -118,4 +118,10 @@ class JoinNowActivity : FormActivity() {
     private fun getPassword(): String {
         return newPassword.text.toString()
     }
+
+    fun goToLoginFromJoinNow(view: View) {
+        val intent = Intent(this, SignInActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
 }
