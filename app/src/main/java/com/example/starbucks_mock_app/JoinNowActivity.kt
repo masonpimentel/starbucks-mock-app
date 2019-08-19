@@ -1,5 +1,6 @@
 package com.example.starbucks_mock_app
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,7 +16,8 @@ class JoinNowActivity : FormActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_join_now)
 
-        newEmail.setOnFocusChangeListener { _, b -> validateEmail(b) }
+        newEmail.setOnFocusChangeListener { _, hasFocus -> validateEmail(hasFocus) }
+        newPassword.setOnFocusChangeListener { _, hasFocus -> validatePassword(hasFocus) }
         newPassword.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 //nothing to do
@@ -26,21 +28,14 @@ class JoinNowActivity : FormActivity() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, count: Int) {
-                if (passwordIsValid(getPassword())) {
-                    passwordCompletion.setImageResource(R.drawable.ic_baseline_done_24px)
-                    passwordIsValid = true
-                    updateFormStatus()
-                } else {
-                    passwordCompletion.setImageResource(R.drawable.ic_baseline_clear_24px)
-                    passwordIsValid = false
-                    updateFormStatus()
-                }
+                validatePassword(false)
             }
         })
     }
 
     fun registerUser(view: View) {
         validateEmail(hasFocus = false, submissionCheck = true)
+        validatePassword(hasFocus = false, submissionCheck = false)
 
         //future work - handle db connection not ready
         if (!formIsValid || MainActivity.dynamoDBMapper == null || !checkInternetConnection(R.id.joinNowLayout)) return
@@ -98,6 +93,20 @@ class JoinNowActivity : FormActivity() {
             joinNowCheckEmail.visibility = View.VISIBLE
             emailError.visibility = View.VISIBLE
             emailIsValid = false
+            updateFormStatus()
+        }
+    }
+
+    private fun validatePassword(hasFocus: Boolean, submissionCheck: Boolean = false) {
+        if (!submissionCheck && hasFocus) return
+
+        if (passwordIsValid(getPassword())) {
+            passwordCompletion.setImageResource(R.drawable.ic_baseline_done_24px)
+            passwordIsValid = true
+            updateFormStatus()
+        } else {
+            passwordCompletion.setImageResource(R.drawable.ic_baseline_clear_24px)
+            passwordIsValid = false
             updateFormStatus()
         }
     }
