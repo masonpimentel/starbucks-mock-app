@@ -16,9 +16,9 @@ class JoinNowActivity : FormActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_join_now)
 
-        newEmail.setOnFocusChangeListener { _, hasFocus -> validateEmail(hasFocus) }
-        newPassword.setOnFocusChangeListener { _, hasFocus -> validatePassword(hasFocus) }
-        newPassword.addTextChangedListener(object : TextWatcher {
+        joinNowEmail.setOnFocusChangeListener { _, hasFocus -> validateEmail(hasFocus) }
+        joinNowPassword.setOnFocusChangeListener { _, hasFocus -> validatePassword(hasFocus) }
+        joinNowPassword.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 //nothing to do
             }
@@ -85,20 +85,22 @@ class JoinNowActivity : FormActivity() {
         if (!submissionCheck && hasFocus) return
 
         if (emailIsValid(getEmail())) {
-            joinNowCheckEmail.visibility = View.INVISIBLE
-            emailError.visibility = View.INVISIBLE
+            joinNowEmailTE.error = null
             emailIsValid = true
             updateFormStatus()
         } else {
-            joinNowCheckEmail.visibility = View.VISIBLE
-            emailError.visibility = View.VISIBLE
+            joinNowEmailTE.error = getString(R.string.join_now_check_email)
             emailIsValid = false
             updateFormStatus()
         }
     }
 
     private fun validatePassword(hasFocus: Boolean, submissionCheck: Boolean = false) {
-        if (!submissionCheck && hasFocus) return
+        if (!submissionCheck && hasFocus) {
+            passwordCompletion.visibility = View.VISIBLE
+            joinNowPasswordRequirement.visibility = View.VISIBLE
+            return
+        }
 
         if (passwordIsValid(getPassword())) {
             passwordCompletion.setImageResource(R.drawable.ic_baseline_done_24px)
@@ -112,11 +114,11 @@ class JoinNowActivity : FormActivity() {
     }
 
     private fun getEmail(): String {
-        return newEmail.text.toString()
+        return joinNowEmail.text.toString()
     }
 
     private fun getPassword(): String {
-        return newPassword.text.toString()
+        return joinNowPassword.text.toString()
     }
 
     fun goToLoginFromJoinNow(view: View) {

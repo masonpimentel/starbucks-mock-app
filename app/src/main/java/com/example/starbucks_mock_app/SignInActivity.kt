@@ -41,12 +41,12 @@ class SignInActivity : FormActivity() {
 
             if (entry != null && pass == entry.password) {
                 runOnUiThread {
-                    signInPasswordTE.helperText = null
+                    signInPasswordTE.error = null
                 }
                 goToLocator()
             } else {
                 runOnUiThread {
-                    signInPasswordTE.helperText = getString(R.string.sign_in_incorrect_credentials)
+                    signInPasswordTE.error = getString(R.string.sign_in_incorrect_credentials)
                 }
             }
             runOnUiThread {

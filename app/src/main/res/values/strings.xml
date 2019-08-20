@@ -27,6 +27,7 @@
         Looks like this email address is already registered.
     </string>
     <string name="join_now_sign_in">Sign in</string>
+    <string name="join_now_security_header">Security</string>
 
     <string name="title_activity_sign_in">Sign in to Rewards</string>
     <string name="sign_in_button">Sign in</string>
