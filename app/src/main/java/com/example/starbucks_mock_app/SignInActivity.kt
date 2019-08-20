@@ -1,7 +1,6 @@
 package com.example.starbucks_mock_app
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 
 import kotlinx.android.synthetic.main.content_sign_in.*
@@ -14,6 +13,8 @@ class SignInActivity : FormActivity() {
 
         signInEmail.setOnFocusChangeListener { _, b -> validateEmail(b) }
         signInPassword.setOnFocusChangeListener { _, b -> validatePassword(b) }
+
+        signInPasswordTE.isPasswordVisibilityToggleEnabled = true
     }
 
     override fun emailIsValid(email: String): Boolean {
@@ -40,14 +41,12 @@ class SignInActivity : FormActivity() {
 
             if (entry != null && pass == entry.password) {
                 runOnUiThread {
-                    signInPasswordInfo.text = ""
-                    clearPasswordFieldError()
+                    signInPasswordTE.helperText = null
                 }
                 goToLocator()
             } else {
                 runOnUiThread {
-                    signInPasswordInfo.text = getString(R.string.sign_in_incorrect_credentials)
-                    passwordFieldError()
+                    signInPasswordTE.helperText = getString(R.string.sign_in_incorrect_credentials)
                 }
             }
             runOnUiThread {
@@ -73,13 +72,11 @@ class SignInActivity : FormActivity() {
         if (!submissionCheck && hasFocus) return
 
         if (emailIsValid(getEmail())) {
-            signInCheckEmail.visibility = View.INVISIBLE
-            signInEmailError.visibility = View.INVISIBLE
+            signInEmailTE.error = null
             emailIsValid = true
             updateFormStatus()
         } else {
-            signInCheckEmail.visibility = View.VISIBLE
-            signInEmailError.visibility = View.VISIBLE
+            signInEmailTE.error = getString(R.string.sign_in_check_email)
             emailIsValid = false
             updateFormStatus()
         }
@@ -89,24 +86,14 @@ class SignInActivity : FormActivity() {
         if (!submissionCheck && hasFocus) return
 
         if (passwordIsValid(getPassword())) {
-            signInPasswordInfo.text = ""
-            clearPasswordFieldError()
+            signInPasswordTE.error = null
             passwordIsValid = true
             updateFormStatus()
         } else {
-            signInPasswordInfo.text = getString(R.string.sign_in_password_requirements)
-            passwordFieldError()
+            signInPasswordTE.error = getString(R.string.sign_in_password_requirements)
             passwordIsValid = false
             updateFormStatus()
         }
-    }
-
-    private fun clearPasswordFieldError() {
-        signInPasswordError.visibility = View.INVISIBLE
-    }
-
-    private fun passwordFieldError() {
-        signInPasswordError.visibility = View.VISIBLE
     }
 
     private fun getEmail(): String {

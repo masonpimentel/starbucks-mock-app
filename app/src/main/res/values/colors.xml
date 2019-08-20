@@ -6,4 +6,5 @@
     <color name="colorError">#E6C63226</color>
     <color name="actionButtonStart">#01A862</color>
     <color name="actionButtonEnd">#57F1BE</color>
+    <color name="grey">#464545</color>
 </resources>
