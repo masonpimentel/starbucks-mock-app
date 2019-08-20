@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#CFCFCF</color>
     <color name="colorAccent">#008441</color>
     <color name="colorError">#E6C63226</color>
+    <color name="actionButtonStart">#01A862</color>
+    <color name="actionButtonEnd">#57F1BE</color>
 </resources>
